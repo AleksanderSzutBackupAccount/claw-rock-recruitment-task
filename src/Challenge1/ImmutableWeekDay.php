@@ -20,30 +20,31 @@ assertException(\OutOfRangeException::class);
 new ImmutableWeekDay(123);
 
 */
-class ImmutableWeekDay
+
+readonly class ImmutableWeekDay
 {
-    public const SUNDAY    = 0;
-    public const MONDAY    = 1;
-    public const TUESDAY   = 2;
-    public const WEDNESDAY = 3;
-    public const THURSDAY  = 4;
-    public const FRIDAY    = 5;
-    public const SATURDAY  = 6;
+     const SUNDAY = 0;
+     const MONDAY = 1;
+     const TUESDAY = 2;
+     const WEDNESDAY = 3;
+     const THURSDAY = 4;
+     const FRIDAY = 5;
+     const SATURDAY = 6;
+     const DAYS_PER_WEEK = 7;
 
     /**
      * @throws \OutOfRangeException
      */
-    public function __construct(public int $value)
+    public function __construct(private int $value)
     {
-        if($value < self::SUNDAY || $value > self::SATURDAY)
-        {
+        if ($value < self::SUNDAY || $value > self::SATURDAY) {
             throw new \OutOfRangeException;
         }
     }
 
     public function addDays(int $value): ImmutableWeekDay
     {
-        return new self($value % 7);
+        return new self($value % self::DAYS_PER_WEEK);
     }
 
     public function equals(ImmutableWeekDay $day): bool
@@ -55,8 +56,8 @@ class ImmutableWeekDay
     {
         try {
             return $this->equals(new self($value));
-        } catch (\OutOfRangeException)
-        {}
+        } catch (\OutOfRangeException) {
+        }
         return false;
     }
 }
