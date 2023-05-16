@@ -33,23 +33,30 @@ class ImmutableWeekDay
     /**
      * @throws \OutOfRangeException
      */
-    public function __construct(int $value)
+    public function __construct(public int $value)
     {
-        //
+        if($value < self::SUNDAY || $value > self::SATURDAY)
+        {
+            throw new \OutOfRangeException;
+        }
     }
 
     public function addDays(int $value): ImmutableWeekDay
     {
-        //
+        return new self($value % 7);
     }
 
     public function equals(ImmutableWeekDay $day): bool
     {
-        //
+        return $this->value === $day->value;
     }
 
     public function isOfValue(int $value): bool
     {
-        //
+        try {
+            return $this->equals(new self($value));
+        } catch (\OutOfRangeException)
+        {}
+        return false;
     }
 }
