@@ -4,11 +4,11 @@ namespace Interview\Challenge2;
 
 interface EventDispatcherInterface
 {
-    public function dispatch(object $event);
+    public function dispatch(object|string $event):void;
 
     /**
-     * @var string $event (FQCN of the event class)
+     * @param  object|string  $event
      * @var \Closure $listener (which accepts event as first argument)
      */
-    public function addListener(string $event, \Closure $listener);
+    public function addListener(object|string $event, \Closure $listener):void;
 }
