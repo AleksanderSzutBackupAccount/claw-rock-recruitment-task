@@ -2,3 +2,5 @@
 /vendor
 .env
 database.sqlite
+.idea
+.phpunit.result.cache
