@@ -1,6 +1,8 @@
 <?php
 
 use Interview\Challenge3\App\StateRequest;
+use Interview\Challenge3\App\StateValidation;
+use Interview\Challenge3\App\StateValidationInterface;
 use Interview\Challenge3\Vendor\StateRequestFactoryInterface;
 use Interview\Misc\IoC;
 
@@ -18,3 +20,4 @@ use Interview\Misc\IoC;
 
 
 IoC::set(StateRequestFactoryInterface::class, StateRequest::class);
+IoC::set(StateValidationInterface::class, StateValidation::class);
